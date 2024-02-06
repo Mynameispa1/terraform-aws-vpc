@@ -1,6 +1,6 @@
 variable "vpc_cidr" {
     type = string
-    default = "10.0.0.0/16"
+    default = "10.0.0.0/16" #user can override
 }
 
 variable "enable_dns_hostnames" {
@@ -34,7 +34,7 @@ variable "igw_tags" {
 variable "public_subnets_cidr" {
   type = list
   validation {
-  condition = length (var.public_subnets_cidr) == 2
+  condition = length (var.public_subnets_cidr) == 2  #length fuction is to find the number of elements in the collection.
   error_message = "Plese give two public valid subnet CIDR"
 }
 }
@@ -47,7 +47,7 @@ variable "private_subnets_cidr" {
   type = list
   validation {
   condition = length (var.private_subnets_cidr) == 2
-  error_message = "Plese give two public valid subnet CIDR"
+  error_message = "Plese give two private valid subnet CIDR"
 }
 }
 
@@ -59,7 +59,7 @@ variable "database_subnets_cidr" {
   type = list
   validation {
   condition = length (var.database_subnets_cidr) == 2
-  error_message = "Plese give two public valid subnet CIDR"
+  error_message = "Plese give two database valid subnet CIDR"
 }
 }
 
@@ -83,3 +83,17 @@ variable "database_route_table_tags" {
    default = {}
 }
 
+
+variable "is_peering_required" {
+  type = bool
+  default = false
+}
+
+variable "acceptor_vpc_id" {
+  type = string
+  default = ""
+}
+
+variable "vpc_peering_tags" {
+  default = {}
+}
